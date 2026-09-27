@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register | CafeTrack</title>
   <link rel="stylesheet" href="style.css">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.22.1/jquery.validate.min.js" integrity="sha512-qu7dMuIm2f0KcKZ3BOoP4c+Hn+r4E8PbD2Ro4rmKsOyheCxcwhzQpf6SojA76dn+owqfANzfTFUTkGA+HpHjOA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
   <main class="split">
@@ -35,23 +38,23 @@
     </section>
 
     <section class="form-side">
-      <form class="card" action="#">
+      <form class="card" id="registerForm" action="#" novalidate>
         <h2>Create Account</h2>
 
         <div class="field">
-          <input type="text" placeholder="Full Name" autocomplete="name" required>
+          <input type="text" id="name" name="name" placeholder="Full Name" autocomplete="name" required>
         </div>
 
         <div class="field">
-          <input type="email" placeholder="Email Address" autocomplete="email" required>
+          <input type="email" id="email" name="email" placeholder="Email Address" autocomplete="email" required>
         </div>
 
         <div class="field">
-          <input type="password" placeholder="Password" minlength="8" autocomplete="new-password" required>
+          <input type="password" id="password" name="password" placeholder="Password" minlength="8" autocomplete="new-password" required>
         </div>
 
         <div class="field">
-          <input type="password" placeholder="Confirm Password" minlength="8" autocomplete="new-password" required>
+          <input type="password" id="confirm" name="confirm" placeholder="Confirm Password" minlength="8" autocomplete="new-password" required>
         </div>
 
         <button class="btn" type="submit">Register</button>
@@ -61,5 +64,52 @@
     </section>
 
   </main>
+
+  <script>
+    $(document).ready(function () {
+
+      //kailangan ng special character
+      $.validator.addMethod("special", function (value) {
+        return /[!@#$%^&*()_+\-=\[\]{};':",.<>/?`~\\]/.test(value);
+      }, "Please include at least one special character (! @ # $ % & *).");
+
+      $("#registerForm").validate({
+        errorClass: "error-msg",
+        errorPlacement: function (error, element) {
+          error.appendTo(element.closest(".field"));
+        },
+        highlight: function (element) {
+          $(element).closest(".field").addClass("invalid");
+        },
+        unhighlight: function (element) {
+          $(element).closest(".field").removeClass("invalid");
+        },
+        rules: {
+          name: {
+            required: true,
+            minlength: 2
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          password: {
+            required: true,
+            minlength: 8,
+            special: true
+          },
+          confirm: {
+            required: true,
+            equalTo: "#password"
+          }
+        },
+        submitHandler: function () {
+          // Success -> proceed to login
+          window.location.href = "login.html";
+        }
+      });
+
+    });
+  </script>
 </body>
 </html>
