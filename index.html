@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CafeTrack | Real-Time QR Inventory Tracking</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+  <nav class="navbar bf-navbar py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">CafeTrack</a>
+      <div class="d-flex gap-2 ms-auto">
+        <a href="login.html" class="btn btn-coffee btn-sm px-3 py-2">Login</a>
+        <a href="register.html" class="btn btn-coffee btn-sm px-3 py-2">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bf-hero py-5">
+    <div class="container py-lg-5">
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-6">
+          <span class="badge bf-badge mb-3">Merrylane Cafe Foodhub • Lipa City</span>
+          <h1 class="display-4 fw-bold lh-sm">CafeTrack — Brew Smarter, Flow Faster</h1>
+          <p class="lead text-secondary mt-3">
+            Real-time QR inventory tracking para hindi na mabulok o maubos ang ingredients. Less waste, faster workflow, full control.
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="dash-window shadow">
+            <div class="dash-topbar d-flex align-items-center gap-2">
+              <span class="dot bg-danger"></span>
+              <span class="dot bg-warning"></span>
+              <span class="dot bg-success"></span>
+              <span class="ms-2 small text-white-50">CafeTrack Dashboard</span>
+            </div>
+            <div class="dash-body d-flex">
+              <div class="dash-sidebar d-none d-sm-flex flex-column gap-2 p-3">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="flex-grow-1 p-3 p-sm-4">
+                <div class="chart d-flex align-items-end gap-2 mb-3">
+                  <div style="height:40%"></div>
+                  <div style="height:65%"></div>
+                  <div style="height:50%"></div>
+                  <div style="height:80%"></div>
+                  <div style="height:60%"></div>
+                  <div style="height:95%"></div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-6">
+                    <div class="stat-box p-3 d-flex align-items-center gap-2">
+                      <i class="bi bi-qr-code-scan fs-4"></i>
+                      <div class="small">Stock Checked Out</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="stat-box p-3 d-flex align-items-center gap-2">
+                      <i class="bi bi-exclamation-triangle fs-4"></i>
+                      <div class="small">3 Low-Stock Alerts</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <section class="bf-features py-5">
+    <div class="container py-lg-4">
+      <h2 class="fw-bold mb-4">Features</h2>
+      <div class="row g-4">
+
+        <div class="col-md-4">
+          <div class="feature-card h-100 p-4">
+            <i class="bi bi-graph-up-arrow feature-icon"></i>
+            <h5 class="fw-bold mt-3">Real-Time Tracking</h5>
+            <p class="text-secondary mb-0">Monitor stock levels, expiration dates, and usage trends in live dashboards.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-card h-100 p-4">
+            <i class="bi bi-qr-code-scan feature-icon"></i>
+            <h5 class="fw-bold mt-3">QR Code Scanning</h5>
+            <p class="text-secondary mb-0">Staff scan their personal QR to log in, then scan item codes to check stock in or out in seconds.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-card h-100 p-4">
+            <i class="bi bi-bell feature-icon"></i>
+            <h5 class="fw-bold mt-3">Smart Alerts</h5>
+            <p class="text-secondary mb-0">Get notified when stock runs low or ingredients approach their expiration date.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="bf-footer py-4 text-center">
+    <div class="container">
+      <p class="mb-0 small">© 2026 CafeTrack • Merrylane Cafe Foodhub, Lipa City</p>
+    </div>
+  </footer>
+
+</body>
+</html>

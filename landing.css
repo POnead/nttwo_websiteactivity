@@ -1,0 +1,67 @@
+/* ===== BrewFlow Landing Theme (Bootstrap 5 override) ===== */
+:root {
+  --sage: #9DBBA1;
+  --sage-dark: #6B8E70;
+  --sage-light: #E8F0E9;
+  --cream: #F4EFE2;
+  --paper: #F7F6F3;
+  --coffee: #96603C;
+  --coffee-dark: #7A4B2C;
+  --ink: #2B2B2B;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.bf-navbar { background: var(--cream); }
+.navbar-brand { color: var(--coffee-dark); font-size: 1.5rem; letter-spacing: -0.5px; }
+
+/* Custom Bootstrap button (BS 5.3 CSS variables) */
+.btn-coffee {
+  --bs-btn-bg: var(--coffee);
+  --bs-btn-border-color: var(--coffee);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: var(--coffee-dark);
+  --bs-btn-hover-border-color: var(--coffee-dark);
+  --bs-btn-hover-color: #fff;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+/* Hero */
+.bf-hero { background: linear-gradient(180deg, #FBFAF7 0%, var(--paper) 100%); }
+.bf-badge {
+  background: var(--sage-light);
+  color: var(--sage-dark);
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+}
+
+/* Dashboard mockup (pure CSS) */
+.dash-window { background: #fff; border: 1px solid #E3E0D8; border-radius: 14px; overflow: hidden; }
+.dash-topbar { background: var(--sage); padding: 10px 14px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; opacity: 0.85; }
+.dash-sidebar { background: var(--sage-light); min-width: 64px; }
+.dash-sidebar span { display: block; height: 10px; border-radius: 5px; background: var(--sage); opacity: 0.6; }
+.chart { height: 150px; border-bottom: 2px solid #E3E0D8; }
+.chart div { flex: 1; background: var(--sage); border-radius: 6px 6px 0 0; }
+.stat-box { background: var(--cream); border-radius: 10px; color: var(--coffee-dark); }
+
+/* Feature cards */
+.bf-features { background: #fff; }
+.feature-card {
+  background: #FCFCFA;
+  border: 1px solid var(--sage);
+  border-radius: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(43, 43, 43, 0.08); }
+.feature-icon { font-size: 2rem; color: var(--sage-dark); }
+
+/* Footer */
+.bf-footer { background: var(--cream); color: var(--coffee-dark); }
