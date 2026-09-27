@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | CafeTrack</title>
   <link rel="stylesheet" href="style.css">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.22.1/jquery.validate.min.js" integrity="sha512-qu7dMuIm2f0KcKZ3BOoP4c+Hn+r4E8PbD2Ro4rmKsOyheCxcwhzQpf6SojA76dn+owqfANzfTFUTkGA+HpHjOA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
   <main class="split">
@@ -36,16 +39,24 @@
     </section>
 
     <section class="form-side">
-      <form class="card" action="#">
+      <form class="card" id="loginForm" action="#" novalidate>
         <h2>Welcome Back</h2>
 
-        <div class="field">
-          <input type="email" placeholder="Email Address" autocomplete="email" required>
+        <div class="demo-box">
+          <p class="demo-title">Test Account</p>
+          <p><span>Email:</span> demo@cafetrack.com</p>
+          <p><span>Password:</span> Coffee#2026</p>
         </div>
 
         <div class="field">
-          <input type="password" placeholder="Password" autocomplete="current-password" required>
+          <input type="email" id="email" name="email" placeholder="Email Address" autocomplete="email" required>
         </div>
+
+        <div class="field">
+          <input type="password" id="password" name="password" placeholder="Password" autocomplete="current-password" required>
+        </div>
+
+        <p class="attempts-msg" id="attemptsMsg">Attempts left: <span id="attemptsLeft">3</span></p>
 
         <button class="btn" type="submit">Log In</button>
 
@@ -55,5 +66,79 @@
     </section>
 
   </main>
+
+  <script>
+    // Demo account 
+    const DEMO_EMAIL = "demo@cafetrack.com";
+    const DEMO_PASSWORD = "Coffee#2026";
+    const MAX_ATTEMPTS = 3;
+    let attemptsLeft = MAX_ATTEMPTS;
+
+
+    function showAttempts() {
+      if (attemptsLeft === 0) {
+        $("#attemptsMsg").text("No attempts left. Please refresh the page.");
+        $("#email, #password, .btn").prop("disabled", true);
+        return;
+      }
+      $("#attemptsMsg").find("#attemptsLeft").text(attemptsLeft);
+      $("#attemptsMsg").toggleClass("low", attemptsLeft <= 1);
+    }
+
+    function showCredError() {
+      $(".cred-error").remove();
+      $("#email").after(
+        $("<label>")
+          .addClass("error-msg cred-error")
+          .text("Email or password is incorrect.")
+      );
+    }
+
+    $(document).ready(function () {
+
+      $("#loginForm").validate({
+        errorClass: "error-msg",
+        errorPlacement: function (error, element) {
+          error.appendTo(element.closest(".field"));
+        },
+        highlight: function (element) {
+          $(element).closest(".field").addClass("invalid");
+        },
+        unhighlight: function (element) {
+          $(element).closest(".field").removeClass("invalid");
+        },
+        rules: {
+          email: {
+            required: true,
+            email: true
+          },
+          password: {
+            required: true
+          }
+        },
+        submitHandler: function () {
+          const email = $("#email").val().trim();
+          const password = $("#password").val();
+
+          if (email.toLowerCase() !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
+            attemptsLeft--;
+            showAttempts();
+            showCredError();
+            return;
+          }
+
+          // Success -> balik sa landing page
+          window.location.href = "index.html";
+        }
+      });
+
+      // Linisin ang "incorrect" error pagkatapos ng bawat submit
+      $("#loginForm").on("submit", function () {
+        $(".cred-error").remove();
+      });
+
+      showAttempts();
+    });
+  </script>
 </body>
 </html>
