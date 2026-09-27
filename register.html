@@ -51,6 +51,10 @@
 
         <div class="field">
           <input type="password" id="password" name="password" placeholder="Password" minlength="8" autocomplete="new-password" required>
+          <ul class="hint" id="passwordHint">
+            <li id="hintLength">At least 8 characters</li>
+            <li id="hintSpecial">At least 1 special character (! @ # $ % &amp; *)</li>
+          </ul>
         </div>
 
         <div class="field">
@@ -66,17 +70,27 @@
   </main>
 
   <script>
+    // Password requirement regex (ginagamit ng rule at ng hint)
+    const SPECIAL_CHARS = /[!@#$%^&*()_+\-=\[\]{};':",.<>/?`~\\]/;
+
+    // Live na pag-check ng requirements habang nagta-type
+    function checkPasswordHint() {
+      const value = $("#password").val();
+      $("#hintLength").toggleClass("met", value.length >= 8);
+      $("#hintSpecial").toggleClass("met", SPECIAL_CHARS.test(value));
+    }
+
     $(document).ready(function () {
 
-      //kailangan ng special character
+      // Custom rule: kailangan ng special character
       $.validator.addMethod("special", function (value) {
-        return /[!@#$%^&*()_+\-=\[\]{};':",.<>/?`~\\]/.test(value);
+        return SPECIAL_CHARS.test(value);
       }, "Please include at least one special character (! @ # $ % & *).");
 
       $("#registerForm").validate({
         errorClass: "error-msg",
         errorPlacement: function (error, element) {
-          error.appendTo(element.closest(".field"));
+          error.insertAfter(element);
         },
         highlight: function (element) {
           $(element).closest(".field").addClass("invalid");
@@ -103,11 +117,26 @@
             equalTo: "#password"
           }
         },
+        messages: {
+          password: {
+            required: "Please enter a password.",
+            minlength: "Password must be at least 8 characters.",
+            special: "Password must include at least 1 special character (! @ # $ % & *)."
+          },
+          confirm: {
+            required: "Please confirm your password.",
+            equalTo: "Passwords do not match."
+          }
+        },
         submitHandler: function () {
           // Success -> proceed to login
           window.location.href = "login.html";
         }
       });
+
+      // I-update ang hint habang nagta-type
+      $("#password").on("keyup change", checkPasswordHint);
+      checkPasswordHint();
 
     });
   </script>
